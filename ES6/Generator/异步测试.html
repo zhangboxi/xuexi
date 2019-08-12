@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="../js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			function ajax1() {
+				$.ajax({
+					url: "http://192.168.3.9:6060/web2/TDMessage/JINGGAI",
+					type: "GET",
+					dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+					async: true,
+					success: function(data) {
+						console.log('ajax1=' + data)
+						return 'data';
+					}
+				});
+				console.log('？？')
+				return '为啥呢'
+			}
+
+
+			function ajax2(data) {
+				console.log('收到1的数据' + data);
+				$.ajax({
+					url: "http://192.168.3.9:6060/web2/TDMessage/Query_GD",
+					type: "GET",
+					dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+					async: false,
+					success: function(data) {
+						console.log('ajax2=' + data)
+						return data;
+					}
+				});
+				
+			}
+
+
+
+			function* longRunningTask(value1) {
+				try {
+					var value2 = yield $.ajax({
+					url: "http://192.168.3.9:6060/web2/TDMessage/JINGGAI",
+					type: "GET",
+					dataType: 'json', //返回的数据格式：json/xml/html/script/jsonp/text
+					async: false,
+					success: function(data) {
+						console.log('ajax1=' + data)
+						return 'data';
+					}
+				});
+					var value3 = yield ajax2(value2);
+					return 0;
+
+					// Do something with value4
+				} catch (e) {
+					// Handle any error from step1 through step4
+				}
+			}
+			
+
+			function scheduler(task) {
+				var taskObj = task.next(task.value);
+				console.log('------')
+				console.log(task);
+				console.log('------')
+				// 如果 Generator 函数未结束，就继续调⽤
+				if (!taskObj.done) {
+					task.value = taskObj.value
+					scheduler(task);
+				}
+			}
+			
+			
+			scheduler(longRunningTask('ccc'));
+		</script>
+	</body>
+</html>

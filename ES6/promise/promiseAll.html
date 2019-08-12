@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			/* All的方法和&很像，只有全成功，或一个失败，才会继续执行，
+			 可以用于多个ajax返回值，这样就不用ajax的同步了，很方便哦.
+			 All的参数，不必非得是数组，不过都得有intertor,
+			 想进入All的catch，那么数组内的promise，就不能有自己的catch，
+			 否则进入自己的catch，会被设定为成功。
+			 
+			 race等同与||，一个进入，就进入ALl，其他的接下来依次进入
+			 */
+
+			function ajax1(sign) {
+				let p = new Promise(function(resolve, reject) {
+					console.log('模拟ajax操作1');
+					setTimeout(function() {
+						if (sign) {
+							resolve('ajax1,操作完成');
+						} else {
+							reject('ajax1,操作失败');
+						}
+
+					}, 2000);
+				});
+				return p;
+			}
+
+			function ajax2(sign) {
+				let p = new Promise(function(resolve, reject) {
+					console.log('模拟ajax操作2');
+					setTimeout(function() {
+						if (sign) {
+							resolve('ajax2,操作完成');
+						} else {
+							reject('ajax2,操作失败');
+						}
+
+					}, 3000);
+				});
+				return p;
+			}
+
+			let ajax1do = ajax1(false).then(function(data) {
+				console.log(data);
+			})
+
+			let ajax2do = ajax2(false).then(function(data) {
+				console.log(data);
+			})
+
+			Promise.all([ajax1do, ajax2do]).then(function(data) {
+				console.log('两个都执行完成')
+				console.log(data)
+			}).catch( function() {
+				console.log('一个执行失败')
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+		<style type="text/css">
+			td {
+				position: relative;
+				z-index: 2;
+			}
+
+			td:hover {
+				z-index: 3;
+				background: none;
+			}
+
+			td .tdtip {
+				display: none;
+			}
+
+			td:hover .tdtip {
+				display: block;
+				position: absolute;
+				top: 8px;
+				background-color: whitesmoke;
+				color: royalblue;
+				word-break: break-all;
+			}
+		</style>
+
+	</head>
+	<body>
+
+
+
+		<table>
+			<td>displayAddress<span class="tdtip">popAddress</span></td>
+
+		</table>
+
+
+
+
+	</body>
+</html>

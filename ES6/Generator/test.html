@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function* helloWorldGenerator() {
+				yield 'hello';
+				yield 'world';
+				return 'ending';
+			}
+			var hw = helloWorldGenerator();
+
+			let one = hw.next();
+			console.log(one);
+			let two = hw.next();
+			console.log(two);
+			let three = hw.next();
+			console.log(three);
+			let fore = hw.next();
+			console.log(fore);
+
+			function* test1() {
+				console.log(1);
+				console.log(2);
+				console.log(3);
+				return null;
+			}
+
+			let aa = test1();
+			let testone1 = aa.next();
+			console.log(testone1);
+
+			function* test2() {
+				yield '1';
+				yield '2';
+				yield '3';
+			}
+
+			let bb = test2();
+			let testone2_1 = aa.next();
+			let testone2_2 = aa.next();
+			let testone2_3 = aa.next();
+			let testone2_4 = aa.next();
+			console.log(testone2_1);
+			console.log(testone2_2);
+			console.log(testone2_3);
+			console.log(testone2_4);
+
+		</script>
+	</body>
+</html>

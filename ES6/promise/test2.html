@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<script src="../js/jquery-3.2.1.js" type="text/javascript" charset="utf-8"></script>
+	<body>
+
+		<script>
+			// 			function timeout(ms) {
+			// 				console.log('进入function');
+			// 				return new Promise((resolve, reject) => {
+			// 					console.log('初始化');
+			// 					setTimeout(resolve, ms, 'done');
+			// 				});
+			// 			}
+			// 			timeout(100).then((value) => {
+			// 				console.log(value);
+			// 			});
+
+			let newparam = {
+				url: 'http://192.168.3.9:6060/web2/TDMessage/Query_GD'
+			}
+
+			function test(param) {
+				return new Promise((resovle, reject) => {
+					$.ajax({
+						"type": param.type || "get",
+						"async": param.async || true,
+						"url": param.url,
+						"data": param.data || "",
+						"success": data => {
+							console.log('返回')
+							resovle(data);
+						},
+						"error": err => {
+							console.log('错误')
+							reject(err);
+						}
+					})
+				})
+			}
+
+			let newp = test(newparam);
+// 			newp.then(function(json) {
+// 				console.log('Contents: ' + json);
+// 			}, function(error) {
+// 				console.error(' 出错了', error);
+// 			});
+			
+			newp.then(function(json) {
+				console.log('Contents1: ' + json);
+				return test(newparam);
+			}, function(error) {
+				console.error(' 出错了', error);
+			}).then(function(json) {
+				console.log('Contents2: ' + json);
+			}, function(error) {
+				console.error(' 出错了', error);
+			});
+			
+			
+			
+			
+			
+			
+		</script>
+
+	</body>
+</html>

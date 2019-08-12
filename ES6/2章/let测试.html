@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			
+			//const常量所绑定是对象,而不是对象的值
+			
+			const foo = {};
+			foo.name = 'zhang';
+			foo.age = 32;
+			console.log(foo.name)
+			foo.name = 'boxi';
+			console.log(foo.name)
+			foo.name = 'boxi11';
+			console.log(foo.name)
+//			foo = {id:'xx'};
+			
+			
+			const map1 = new Map()
+			const objkey = {p1: 'v1'}
+			map1.set(objkey, 'hello')
+			const fun = function(a) {console.log(a);}
+			map1.set(fun, fun)
+			console.log(map1.get(fun))
+			console.log(map1.get(objkey))
+			
+			let a = map1.get(fun);
+			a('xx');
+			
+			
+			
+			
+			
+		</script>
+	</body>
+
+</html>

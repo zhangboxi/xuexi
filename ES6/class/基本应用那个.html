@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			class Person { //定义了一个名字为Person的类
+				constructor(name, age) { //constructor是一个构造方法，用来接收参数
+					this.name = name; //this代表的是实例对象
+					this.age = age;
+				}
+				say() { //这是一个类的方法，注意千万不要加上function
+					return "我的名字叫" + this.name + "今年" + this.age + "岁了";
+				}
+			}
+
+
+			let p = new Person('zhangxudong', 27);
+			let say = p.say();
+			console.log(p.age);
+
+			class ColorPoint extends Person {
+				constructor(name, age, color) {
+					super(name, age); // 调⽤⽗类的 constructor(x, y)
+					this.color = color;
+				}
+				toString() {
+					return this.color + ' ' + super.say(); // 调⽤⽗类的 toString()
+				}
+			}
+
+
+			let extentp = new ColorPoint('boxi', 100, 'red');
+			let newstring = extentp.toString();
+			console.log(newstring);
+
+
+
+
+			class Example1 {
+				constructor(a, b) {
+					this.a = a;
+					this.b = b;
+				}
+				get a() {
+					console.log('getter');
+					return this._a;
+				}
+				set a(a) {
+					console.log('setter');
+					this.a = a;
+				}
+			}
+			let exam1 = new Example1(1, 2); //初始化时，自动是调用set
+			console.log(exam1.a); // 1, 获取值得时候，调用get
+			console.log(exam1._a); // 1, 不调用get
+		</script>
+	</body>
+</html>

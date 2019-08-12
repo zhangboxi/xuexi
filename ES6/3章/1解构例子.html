@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			//1数组的解构,感觉也就初始化的时候用一用,别的时候用的并不多,但解构对于默认值和空参数的处理感觉很有用
+			let [a,[b], , c, d=4,...e] = [1,[2],null,3, ,5,6];
+			console.log(a,b,c,d,e);
+			
+			console.log('---------------');
+			
+			/*2对象赋值:对象赋值是个坑啊....有点像键值对的感觉,
+			  且对象解构赋值并不能像数组那样,必须为key:value,
+			  而且写的太麻烦，可读性就会变得很差
+			*/
+			let {a2:a2_1, b2 = '给予默认值'} = {a2:"a2只是名字，关键是后面的值"};
+			console.log(a2_1);
+			console.log(b2);
+			console.log('---------------');
+			//3函数解构:直接传入指定的对象,可无序传参数了，函数的返回就很有用,直接返回多个参数,棒棒的
+			function fun1({f1,f2}){
+				console.log('F1的值为:'+f1);
+				console.log('F2的值为:'+f2.test);
+				return [f1,f2];
+			}
+
+			let [re1,re2] = fun1({f2:{test:'xx'},f1:'F1的值'});
+			console.log(re1);
+			console.log(re2);
+			console.log('---------------');
+			
+			//4对JSON的解构,根据名字直接拿出值,可乱序,真棒
+			let jsondata = {
+				name:'张旭东',
+				age:26,
+				cor:[117,26]
+			};
+			
+			let {age,name,cor} = jsondata;
+			console.log(age);
+			console.log(name);
+			console.log(cor);
+			
+			//4对Map的遍历输出
+			let maptest = new Map();
+			maptest.set('first1','value1');
+			maptest.set('first2','value2');
+			maptest.set('first3','value3');
+			console.log(maptest);
+			
+			for(let[key,value] of maptest){
+				console.log(key+':'+value);
+			}
+			
+		</script>
+		
+	</body>
+</html>
