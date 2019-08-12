@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//Vue中,子类调用父类方法用$emit,在这个例子里,Compontent声明的是子类，初始化时的<blog-post>中的v-on:enlarge-text="onEnlargeText(0.1)"是父类
+			
+			Vue.component('blog-post', {
+				props: ['post'],
+				template: `
+				<div class="blog-post">
+				  <h3>{{ post.title }}</h3>
+				 <button v-on:click="$emit('enlarge-text')">
+				  变大
+				</button>
+				  <div v-html="post.content"></div>
+				</div>
+			  `
+			})
+		</script>
+
+		<div id="blog-posts-events-demo">
+			<div :style="{ fontSize: postFontSize + 'em' }">
+				<blog-post v-for="post in posts" v-bind:key="post.id" v-bind:post="post" v-on:enlarge-text="onEnlargeText(0.1)"></blog-post>
+			</div>
+		</div>
+
+
+		<script type="text/javascript">
+			new Vue({
+				el: '#blog-posts-events-demo',
+				data: {
+					posts: [{
+							id: 1,
+							title: 'My journey with Vue'
+						}
+					],
+					postFontSize: 1
+				},
+				methods: {
+					onEnlargeText: function(enlargeAmount) {
+						this.postFontSize += enlargeAmount
+					}
+				}
+			})
+		</script>
+
+	</body>
+</html>

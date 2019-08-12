@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+
+		</script>
+	</head>
+	<body>
+		<!--
+		对于一个带有 v-model 的组件（核心用法），它应该如下：
+    带有v-model的父组件通过绑定的value值（即v-model的绑定值）传给子组件，子组件通过 prop接收一个 value;
+    子组件利用 $emit 触发 input 事件，并传入新值value给父组件；
+		https://www.cnblogs.com/coffeelovetea/p/8326115.html-->
+		
+		
+		
+		<div id="app">
+			<my-component v-model="msg"></my-component>
+			msg: {{msg}}
+			<my-counter v-model="num"></my-counter>
+			num: {{num}}
+		</div>
+
+		<script type="text/javascript">
+			Vue.component('my-component', {
+				template: `<div>,
+										<input type="text" :value="currentValue" @input="handleInput"/>
+									</div>`,
+				data: function() {
+					return {
+						currentValue: this.value //将prop属性绑定到data属性上，以便修改prop属性（Vue不允许直接修改prop属性的值）
+					}
+				},
+				props: ['value'], //接收一个 value prop
+				methods: {
+					handleInput(event) {
+						var value = event.target.value;
+						this.$emit('input', value); //触发 input 事件，并传入新值
+					}
+				}
+			});
+			Vue.component("my-counter", {
+				template: `<div>
+  <h1>{{value}}</h1>
+  <button @click="plus">+</button>
+  <button @click="minu">-</button>
+  </div>`,
+				props: {
+					value: Number //接收一个 value prop
+				},
+				data: function() {
+					return {
+						val: this.value
+					}
+				},
+				methods: {
+					plus() {
+						this.val = this.val + 1
+						this.$emit('input', this.val) //触发 input 事件，并传入新值
+					},
+					minu() {
+						if (this.val > 0) {
+							this.val = this.val - 1
+							this.$emit('input', this.val) //触发 input 事件，并传入新值
+						}
+					}
+				}
+			});
+			new Vue({
+				el: '#app',
+				data: {
+					msg: 'hello world',
+					num: 0
+				}
+			})
+		</script>
+
+	</body>
+</html>

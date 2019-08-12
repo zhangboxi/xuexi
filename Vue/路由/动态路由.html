@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>Hello App!</h1>
+			<p>
+				<div style="font-size: 20px; width: 100px; height: 50px; background-color: rosybrown;"><router-link to="/user/foo">Go to Foo</router-link></div>
+				<router-link to="/user/bar">Go to Bar</router-link>
+				<router-link to="/password/ppp">Go to Password</router-link>
+				<router-link to="/pas11sword/ppp">404 Test</router-link>
+			</p>
+			<router-view></router-view>
+		</div>
+
+		<script type="text/javascript">
+			const User = {
+				template: '<div>动态输出ID  {{ $route.params.id }}</div>',
+			}
+			
+			const Name = {
+				template: '<div>Password {{ $route.params.name }}</div>',
+			}
+			
+			const nofound404 = {
+				template: '<div>没找到</div>',
+			}
+			
+			const router = new VueRouter({
+				routes: [
+					// 动态路径参数 以冒号开头
+					{
+						path: '/user/:id',
+						component: User
+					},
+					{
+						path: '/password/:name',
+						component: Name
+					},
+					{
+						path: '*',
+						component: nofound404
+					}
+				]
+			})
+			
+			setTimeout(()=>router.push({ path: '/home' }),2000)
+			
+			const app = new Vue({
+				el: '#app',
+				watch: {
+					'$route'(to, from) {
+						console.log(to.params)
+					}
+				},
+				router
+			})
+		</script>
+	</body>
+</html>

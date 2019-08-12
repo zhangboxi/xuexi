@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+<!-- 		6217213400016075698
+		28133208
+		85890112 
+		16 5 
+		-->
+		<div id="app1">{{sharedState.message}}</div>
+		<div id="app2">{{sharedState.message}}</div>
+
+		<script type="text/javascript">
+			let newdate = {
+				count: 0
+			}
+
+			var store = {
+				debug: true,
+				state: {
+					message: 'Hello!'
+				},
+				setMessageAction(newValue) {
+					if (this.debug) console.log('setMessageAction triggered with', newValue)
+					this.state.message = newValue
+				},
+				clearMessageAction() {
+					if (this.debug) console.log('clearMessageAction triggered')
+					this.state.message = ''
+				}
+			}
+
+
+			let app1 = new Vue({
+				el: '#app1',
+				data: {
+					privateState: {},
+					sharedState: store.state
+				}
+
+			})
+
+			let app2 = new Vue({
+				el: '#app2',
+				data: {
+					privateState: {},
+					sharedState: store.state
+				}
+
+			})
+		</script>
+	</body>
+</html>

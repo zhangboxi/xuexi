@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		
+		<div id="app1">
+			<span v-if="ishow"> if是否显示 </span>
+			
+		</div>
+		
+		<div id="app2">
+			<span v-if="ishow2"> if是否显示 </span>
+			<span v-else> else显示 </span>
+		</div>
+		
+		<div id="app3">
+			<span v-if="ishow"> if是否显示 </span>
+			<span v-else-if="elseifshow"> else if显示 </span>	
+			<span v-else> else显示 </span>
+		</div>
+		
+		<div id="app4">
+			<h1 v-show="ishow">Hello!</h1>
+		</div>
+		
+		<script type="text/javascript">
+			let app = new Vue({
+				el:'#app1',
+				data:{
+					ishow:true
+				}
+			})
+			
+			let app2 = new Vue({
+				el:'#app2',
+				data:{
+					ishow2:false
+				}
+			})
+			
+			let app3 = new Vue({
+				el:'#app3',
+				data:{
+					ishow:false,
+					elseifshow:true
+				}
+			})
+			
+			//可以在<template> 使用,if else 
+// 			<template v-if="ok">
+// 			  <h1>Title</h1>
+// 			  <p>Paragraph 1</p>
+// 			  <p>Paragraph 2</p>
+// 			</template>
+			//if是懒加载,当判断为false时,是不被初始化的
+			
+			
+			let app4 = new Vue({
+				el:'#app4',
+				data:{
+					ishow:false
+					
+				}
+			})
+			//show不能用于template,且只是单纯的display隐藏显示,就算为false,也是被加载出来而看不见而已
+			
+		</script>
+		
+	</body>
+</html>

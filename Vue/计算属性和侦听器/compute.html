@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
+		<div id="app">
+			{{message}}<br>
+			{{reversemessage}}
+		</div>
+
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: 'this is message'
+				},
+				computed: {
+					reversemessage: function() {
+						// `this` 指向 vm 实例
+						return this.message.split('').reverse().join('')
+					}
+				}
+			})
+			
+			//当改变message的值时,reversemessage也会随之改变
+			
+		</script>
+	</body>
+</html>

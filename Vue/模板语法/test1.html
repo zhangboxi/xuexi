@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
+		<div id="app">
+			<span>{{ message }}</span>
+			<p>Using v-html directive: <span v-html="message"></span></p>
+		</div>
+
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			let vue1 = new Vue({
+				el: '#app',
+				data:{
+					message:'newmessage'
+				}
+			})
+		</script>
+	</body>
+</html>

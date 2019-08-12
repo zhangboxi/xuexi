@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+		<ul id="example-2">
+			<li v-for="(item, index) in items">
+				{{ parentMessage }} - {{ index }} - {{ item.message }}
+			</li>
+		</ul>
+
+		<div id="emample-3">
+			<div v-for="(value, name, index) in object">
+				{{ index }}. {{ name }}: {{ value }}
+			</div>
+		</div>
+		<script type="text/javascript">
+			
+			//数组循环
+			var example2 = new Vue({
+				el: '#example-2',
+				data: {
+					parentMessage: 'Parent',
+					items: [{
+							message: 'Foo'
+						},
+						{
+							message: 'Bar'
+						}
+					]
+				}
+			})
+			//对象循环
+			new Vue({
+				el: '#emample-3',
+				data: {
+					object: {
+						title: 'How to do lists in Vue',
+						author: 'Jane Doe',
+						publishedAt: '2016-04-10'
+					}
+				}
+			})
+			
+			//避免for和if一起使用,会出问题
+			//当在自定义组件里面使用for时,一定要带上key,<my-component v-for="item in items" :key="item.id"></my-component>
+		</script>
+
+	</body>
+</html>

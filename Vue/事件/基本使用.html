@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<div id="app" @click="maopao">
+			<button v-on:click.stop="addone(1)">Add 1</button>
+			<p>The button above has been clicked {{ counter }} times.</p>
+		</div>
+		<script type="text/javascript">
+			let app = new Vue({
+				el: '#app',
+				data: {
+					counter: 0
+				},
+				methods: {
+					addone: function(value) {
+						alert(value)
+						this.counter++;
+						//阻止事件冒泡
+						// event.stopPropagation()
+					},
+					maopao:function(){
+						alert('事件冒泡');
+					}
+				}
+			})
+		</script>
+
+	</body>
+</html>

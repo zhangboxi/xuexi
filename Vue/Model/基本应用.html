@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id='app'>
+			<input v-model="message" placeholder="edit me">
+			<p>Message is: {{ message }}</p>
+
+			<input type="checkbox" id="testcheckbox" value='test' v-model="checked">
+			<label for="testcheckbox">test</label><br />
+			<span>is checked: {{ checked }}</span><br />
+
+			<input type="checkbox" id="张ID" value="张" v-model="checkedNames">张</imput>
+			<input type="checkbox" id="旭ID" value="旭" v-model="checkedNames">旭</imput>
+			<input type="checkbox" id="东ID" value="东" v-model="checkedNames">东</imput>
+			<input type="checkbox" id="伯ID" value="伯" v-model="checkedNames">伯</imput>
+			<input type="checkbox" id="西ID" value="西" v-model="checkedNames">西</imput>
+
+			<br>
+			<span>Checked names: {{ checkedNames }}</span><br>
+
+
+			-----------------------------------------<br />
+
+
+		</div>
+
+		<div id="example-4">
+			<input type="radio" id="one" value="One" v-model="picked">
+			<label for="one">One</label>
+			<br>
+			<input type="radio" id="two" value="Two" v-model="picked">
+			<label for="two">Two</label>
+			<br>
+			<input type="radio" v-model="picked" v-bind:value="a">v-bind值测试</input>
+			<br>
+			<span>Picked: {{ picked }}</span>
+		</div>
+
+		<div id="example-5">
+			<select v-model="selected">
+				<option disabled value="">请选择</option>
+				<option>A</option>
+				<option>B</option>
+				<option>C</option>
+				<option v-bind:value="{ number: 123 }">123</option>
+			</select>
+			<span>Selected: {{ selected }}</span>
+		</div>
+
+
+		<script type="text/javascript">
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: '',
+					checked: 'true', //返回true,false,
+					checkedNames: [] //返回value值
+				}
+			})
+
+			let app2 = new Vue({
+				el: '#example-4',
+				data: {
+					a:'v-bind值测试 ',
+					picked: ''
+				}
+			})
+
+			let app3 =new Vue({
+				el: '#example-5',
+				data: {
+					selected: ''
+				}
+			})
+		</script>
+
+	</body>
+</html>

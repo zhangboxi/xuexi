@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+
+		<div id='app'>
+			<mybuttom v-bind:title="title" v-on:changeitem="onEnlargeText('good')"></mybuttom>
+		</div>
+
+		<script type="text/javascript">
+			//v-on:click="$emit('enlarge-text')"
+
+			Vue.component('mybuttom', {
+				props: ['title'],
+				template: '<div @click="itemClickHandle">{{title}}</div>',
+				methods: {
+					itemClickHandle() {
+						console.log('进入子事件')
+						this.$emit('changeitem');
+					}
+				}
+
+			})
+
+
+			let app = new Vue({
+				el: '#app',
+				data: {
+					title: '点击'
+				},
+				methods: {
+					onEnlargeText: function(enlargeAmount) {
+						console.log('传入父事件' + enlargeAmount)
+					}
+				}
+			})
+		</script>
+
+
+	</body>
+</html>

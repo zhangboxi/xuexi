@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../js/vue-router.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<h1>Hello App!</h1>
+			<p>
+				<router-link to="/foo">Go to Foo</router-link>
+				<router-link to="/user">Go to user</router-link>
+				<router-link to="/qiantao">嵌套测试</router-link>
+			</p>
+			<router-view></router-view>
+		</div>
+
+		<script type="text/javascript">
+			const User = {
+				template: ' <div>User</div> ' //嵌套的另一个路由
+			}
+			const Foo = {
+				template: '<div>Bar</div>'
+			}
+			const qiantao = {
+				template: '<div><router-link to="/qiantao/zi1">嵌套1</router-link><router-link to="/qiantao/zi2">嵌套2</router-link><router-view></router-view></div>'
+			}
+			const zi1 = {
+				template: '<div>嵌套1</div>'
+			}
+			const zi2 = {
+				template: '<div>嵌套2</div>'
+			}
+
+			const router = new VueRouter({
+				routes: [
+					// 动态路径参数 以冒号开头
+					{
+						path: '/foo',
+						component: Foo
+					},
+					{
+						path: '/user',
+						component: User
+					},
+					{
+						path: '/qiantao',
+						component: qiantao,
+						children: [{
+								path: '/qiantao/zi1', // 默认路由
+								name: 'zi1', // 当匹配上RouterComponents后，默认展示在<router-view>中
+								component: zi1
+							},
+							{
+								path: '/qiantao/zi2',
+								name: 'zi2',
+								component: zi2
+							},
+						]
+					}
+
+				]
+			})
+
+			const app = new Vue({
+				el: '#app',
+				router
+			})
+		</script>
+	</body>
+</html>

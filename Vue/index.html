@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title></title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p>{{msg}}</p>
+			<p v-text="msg"></p>
+			<p v-html="msg"></p>
+		</div>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: '#app', //element
+				data: {
+					msg: '<strong>Hello</strong> Vue!',
+				}
+			})
+		</script>
+
+	</body>
+</html>

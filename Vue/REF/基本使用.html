@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<div id="app">
+			<input id="ref1" type="text" ref="input1" />
+			<button @click="add">添加</button>
+		</div>
+
+		<div id="app7">
+			<aaa ref=inputText></aaa>
+			<input type="text" ref="TEXT">
+			<button @click="add">添加</button>
+		</div>
+
+		<script>
+			
+// 			1、ref 加在普通的元素上，用this.ref.name 获取到的是dom元素
+// 			2、ref 加在子组件上，用this.ref.name 获取到的是组件实例，可以使用组件的所有方法。
+// 			3、如何利用 v-for 和 ref 获取一组数组或者dom 节点
+			
+			new Vue({
+				el: "#app",
+				methods: {
+					add: function() {
+						alert(this.$refs.input1.id);
+						this.$refs.input1.value = "22"; //this.$refs.input1  减少获取dom节点的消耗
+					}
+				}
+			})
+
+
+			Vue.component('aaa', {
+				template: "<div>我是一个组件</div>"
+			}) //欢迎加入前端全栈开发交流圈一起吹水聊天学习交流：864305860
+			var app7 = new Vue({
+				el: "#app7",
+				data: {
+
+				},
+				methods: {
+					add: function() {
+						console.log(this.$refs.inputText);
+						console.log(this.$refs);
+					}
+				}
+			}) //欢迎加入前端全栈开发交流圈一起吹水聊天学习交流：864305860
+			var aaa = app7.$refs.inputText;
+		</script>
+
+	</body>
+</html>
