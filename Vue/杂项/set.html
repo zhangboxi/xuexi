@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div id="app">
+            {{name}}<br>
+            <!-- {{list}} -->
+        </div>
+
+        <script>
+            let app = new Vue({
+                el:'#app',
+                data:{
+                    name:'zhang',
+                    message:{
+                        age:18
+                    }
+                }
+            })
+
+            app.$set(app.message, "key", 'xxx')
+
+        </script>
+
+	</body>
+</html>
