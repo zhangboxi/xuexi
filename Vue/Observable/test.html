@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
+		<div id="app">
+			<p>第一个改变，两个公用一个数据</p>
+			<label for="bookNum">数量</label>
+			<button @click="setCount(count+1)">+</button>
+			<span>{{count}}</span>
+			<button @click="setCount(count-1)">-</button>
+		</div>
+
+		<div id="app2">
+				<p>第二个改变，当改变一个的时候，第二个也改变，vue2.6简易的vuex</p>
+				<label for="bookNum">数量</label>
+				<button @click="setCount(count+1)">+</button>
+				<span>{{count}}</span>
+				<button @click="setCount(count-1)">-</button>
+		</div>
+
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			const store = Vue.observable({ count: 0 })  //定义一个变量
+				const mutations = {  //定义一个方法，将来在组件中调用这个方法从而能改变上面的变量count值
+				setCount (count) {
+					console.log('进入')
+					store.count = count
+				}
+			}
+
+
+			let app = new Vue({
+				el: '#app',
+				data: {
+					message: 'this is message'
+				},
+				computed: {
+					count () {
+					return store.count //用于去渲染之前Observable中定义的变量count
+					}
+				},
+				methods: {
+					setCount: mutations.setCount
+				}
+			})
+
+			let app2 = new Vue({
+				el: '#app2',
+				data: {
+					message: 'this is message'
+				},
+				computed: {
+					count () {
+					return store.count //用于去渲染之前Observable中定义的变量count
+					}
+				},
+				methods: {
+					setCount: mutations.setCount
+				}
+			})
+			
+			//当改变message的值时,reversemessage也会随之改变
+			
+		</script>
+	</body>
+</html>
