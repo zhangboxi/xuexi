@@ -14,22 +14,50 @@
 
 		<script type="text/javascript">
 			const store = new Vuex.Store({
+				//定义监控de数，和vue一样，可以用set添加新的需要监控的数
 				state: {
 					count: 0
 				},
+				//定义方法
 				mutations: {
+					increment(state,value) {
+						state.count+=value
+					}
+				},
+				//异步的方法,需要调用mutations的方法
+				actions:{
 					increment(state) {
-						state.count++
+						setTimeout(() => {
+							state.commit('increment',2)
+						}, 1000);
+						
+					}
+				},
+				//相当与conpute
+				getters:{
+					doublecount(state){
+						return state.count*2
 					}
 				}
 			}) 
 			
 			const Counter = {
-			  template: `<div>{{ count }}</div>`,
+			  template: `<div>{{ count }}<br>{{doublecount}}<br><button @click="myclick">mutations</button><br><button @click="myclick2">actions</button></div>`,
 			  computed: {
 				count () {
 				  return store.state.count
+				},
+				doublecount(){
+					return store.getters.doublecount
 				}
+			  },
+			  methods:{
+				  myclick(){
+					store.commit('increment',2)
+				  },
+				  myclick2(){
+					store.dispatch('increment')
+				  }
 			  }
 			}
 			
