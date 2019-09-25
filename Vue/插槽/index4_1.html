@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		<div id="app">
+			<child :slotList='slotList'	>
+					<template slot="slot-scope" slot-scope="item">
+						<li>书名：<span style="color: red">《{{item.title}}》</span> 作者：<span style='color: green'>{{item.name}}</span></li>
+					</template>
+			</child>
+	</div>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			
+		
+			Vue.component('child',{
+				props: ['slotList'],
+				// props:{
+				// 		slotList: {
+				// 			type: Array,
+				// 			default: () => []
+				// 		}
+				// },
+				data () {
+						return {
+
+						}
+				},
+        template:`
+						<div>
+							<ul>
+									<slot name="slot-scope" v-for="item in slotList" v-bind="item">
+										<li>书名：《{{item.title}}》; 作者：{{item.name}}</li>
+									</slot>
+							</ul>
+						</div>
+        `
+    })
+
+    let vm = new Vue({
+        el:'#app',
+        data:{
+					slotList: [
+                {
+                  title: '围城',
+                  name: '钱钟书'
+                },
+                 {
+                  title: '追风筝的人',
+                  name: '卡勒德·胡赛尼'
+                },
+                 {
+                  title: '灿烂千阳',
+                  name: '卡勒德·胡赛尼'
+                }
+            ]
+        }
+    })
+		</script>
+	</body>
+</html>
