@@ -10,16 +10,16 @@
 			<div class="father">
 					<h3>这里是父组件</h3>
 					<child>
-							<span>菜单1</span>
-							<span>菜单2</span>
-							<span>菜单3</span>
+							<span slot="demo1">菜单1</span>
+							<span slot="demo2">菜单2</span>
+							<span slot="demo1">菜单3</span>
 					</child>
 			</div>
 	</div>
 	<template id="child">
     <div class="child">
         <h3>这里是子组件</h3>
-        <slot></slot>
+        <slot name="demo1"></slot>
     </div>
 </template>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
