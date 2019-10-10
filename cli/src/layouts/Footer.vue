@@ -1,6 +1,6 @@
 <template>
   <div>
-    Footer
+    Ant Design ©2018 Created by Ant UED
   </div>
 </template>
 
