@@ -8,6 +8,7 @@
       width="300px"
     >
       <template v-slot:handle>
+        <!-- 将抽屉（Drawe）的开关，挂载到自定义button上 -->
         <div class="handle" @click="visible = !visible">
           <a-icon :type="visible ? 'close' : 'setting'"></a-icon>
         </div>
