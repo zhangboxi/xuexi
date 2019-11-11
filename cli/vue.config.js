@@ -7,7 +7,11 @@ module.exports = {
     }
   },
   devServer: {
-    //当纯前台测试时，添加这个，让访问进入下面的流程中，访问数据文件，并返回数据结果
+    /*
+      添加了mock方便测试，在mock文件夹中，放置了各种数据，当正常启动时，去直接访问文件数据，完成测试环境搭建
+      在package.json中配置了serve:no-mock启动方式，当输入npm run serve:no-mock启动时，进入非mock环境，并在下方else if判断
+      当正常启动时，进入mock测试环境
+    */
     proxy: {
       "/api": {
         target: "http://localhost:8080",
@@ -15,7 +19,7 @@ module.exports = {
           if (req.headers.accept.indexOf("html") !== -1) {
             console.log();
             return "/index.html";
-          } else {
+          } else if (process.env.MOCK !== "none") {
             const name = req.path
               .split("/api/")[1]
               .split("/")
