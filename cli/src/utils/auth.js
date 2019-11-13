@@ -1,8 +1,9 @@
+const currentAuth = [];
 // const currentAuth = ["admin"];
-// export { currentAuth };
+export { currentAuth };
 
 export function getCurrentAuthority() {
-  return ["admin"];
+  return currentAuth;
 }
 
 export function check(authority) {
@@ -13,4 +14,8 @@ export function check(authority) {
 export function isLogin() {
   const current = getCurrentAuthority();
   return current && current[0] !== "guest";
+}
+
+export function SetAuth() {
+  currentAuth.push("admin");
 }
