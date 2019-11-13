@@ -38,6 +38,11 @@ Vue.use(Auth);
 //权限管理的方法一：组建管理法，在用的地方，用<Authorized>嵌套例子： <Authorized :authority="['admin']"></Authorized>
 Vue.component("Authorized", Authorized);
 
+const IconFont = Icon.createFromIconfontCN({
+  scriptUrl: "//at.alicdn.com/t/font_1507448_78zd09ottf8.js" // 在 iconfont.cn 上生成
+});
+Vue.component("IconFont", IconFont);
+
 new Vue({
   router,
   store,
