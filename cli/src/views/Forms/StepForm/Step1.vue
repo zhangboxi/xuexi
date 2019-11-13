@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!--ant design vue的自动校验：form-->
     <a-form layout="horizontal" :form="form">
       <a-form-item
         label="付款账户"
@@ -11,10 +12,39 @@
             'payAccount',
             {
               initialValue: step.payAccount,
-              rules: [{ required: true, message: '请输入付款账号' }]
+              rules: [{ required: true, min: 6, message: '长符不符合' }]
             }
           ]"
           placeholder="请输入付款账号"
+        />
+      </a-form-item>
+
+      <a-form-item
+        label="收款账户"
+        :label-col="formItemLayout.labelCol"
+        :wrapper-col="formItemLayout.wrapperCol"
+      >
+        <!--下面是封装自动校验的表单 ReceiverAccount，自定义校验validator为内容-->
+        <ReceiverAccount
+          v-decorator="[
+            'receiverAccount',
+            {
+              initialValue: step.receiverAccount,
+              rules: [
+                {
+                  required: true,
+                  message: '请输入收款账号',
+                  validator: (rule, value, callback) => {
+                    if (value && value.number) {
+                      callback();
+                    } else {
+                      callback(false);
+                    }
+                  }
+                }
+              ]
+            }
+          ]"
         />
       </a-form-item>
       <a-form-item>
@@ -25,7 +55,11 @@
 </template>
 
 <script>
+import ReceiverAccount from "@/components/ReceiverAccount";
 export default {
+  components: {
+    ReceiverAccount
+  },
   data() {
     this.form = this.$form.createForm(this);
     return {
@@ -45,6 +79,7 @@ export default {
     handleSubmit() {
       const { form, $router, $store } = this;
       form.validateFields((err, values) => {
+        console.log(values);
         if (!err) {
           //更新vuex中的值
           $store.commit({

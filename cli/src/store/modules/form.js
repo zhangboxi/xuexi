@@ -4,7 +4,11 @@ import request from "../../utils/request";
 //VUEX中的一些参数，并在上方的index.js加载
 const state = {
   step: {
-    payAccount: "123456"
+    payAccount: "123456",
+    receiverAccount: {
+      type: "alipay",
+      number: ""
+    }
   }
 };
 

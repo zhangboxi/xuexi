@@ -17,7 +17,8 @@ import {
   Radio,
   Menu,
   Form,
-  Input
+  Input,
+  Select
 } from "ant-design-vue";
 Vue.config.productionTip = false;
 
@@ -28,6 +29,8 @@ Vue.use(Drawer);
 Vue.use(Radio);
 Vue.use(Menu);
 Vue.use(Form);
+Vue.use(Select);
+
 Vue.use(Input);
 //权限管理的方法二：在用的地方， v-auth="['admin']" 例子：<div v-auth="['admin']"/>,只对第一次有用，当更换时，不能改变
 Vue.use(Auth);
