@@ -2,6 +2,10 @@ module.exports = {
   css: {
     loaderOptions: {
       less: {
+        //更改主题色，类似于elementui，方便太多了，不过这个是全局修改
+        modifyVars: {
+          "primary-color": "#1DA57A"
+        },
         javascriptEnabled: true
       }
     }

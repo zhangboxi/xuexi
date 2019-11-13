@@ -1,6 +1,7 @@
 <template>
   <div :class="[`nav-theme-${navTheme}`, `nav-layout-${navLayout}`]">
-    <a-layout id="components-layout-demo-side" style="min-height: 100vh">
+    <!--在这里修改了全局主题样式，覆盖了.ant-menu-dark .ant-menu-item-selected，在下方用vue的深度选择才能修改到-->
+    <a-layout class="components-layout-demo-side" style="min-height: 100vh">
       <a-layout-sider
         v-if="navLayout === 'left'"
         :theme="navTheme"
@@ -69,6 +70,18 @@ export default {
 </script>
 
 <style scoped>
+/* vue引用了第三方组件，需要在组件中局部修改第三方组件的样式，而又不想去除scoped属性造成组件之间的样式污染。此时只能通过>>>，穿透scoped。
+用于修改全局主题的样式，覆盖全局主题
+ 外层 >>> 第三方组件 {
+ 
+      样式
+ 
+  }
+   */
+
+.components-layout-demo-side >>> .ant-menu-dark .ant-menu-item-selected {
+  color: gold;
+}
 .trigger {
   padding: 0 20px;
   line-height: 64px;
