@@ -13,15 +13,16 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: "/",
+      hideInMenu: true,
+      redirect: "/user/login"
+    },
+    {
       path: "/user",
       hideInMenu: true,
       component: () =>
         import(/* webpackChunkName: "user" */ "./layouts/UserLayout"),
       children: [
-        {
-          path: "/user",
-          redirect: "/user/login"
-        },
         {
           path: "/user/login",
           name: "login",
@@ -37,16 +38,33 @@ const router = new Router({
       ]
     },
     {
-      path: "/",
-      meta: { authority: ["user", "admin"] },
+      path: "/AllMenu",
+      meta: { authority: ["guest", "user", "admin"] },
       component: () =>
         import(/* webpackChunkName: "layouts" */ "./layouts/BasicLayout"),
       children: [
-        // dashboard
         {
-          path: "/",
-          redirect: "/user/login"
+          path: "/first",
+          name: "first html",
+          meta: { icon: "dashboard", title: "首页" },
+          component: { render: h => h("router-view") },
+          children: [
+            {
+              path: "/first/firstview1",
+              name: "first",
+              meta: { title: "首页1" },
+              component: () =>
+                import(
+                  /* webpackChunkName: "first" */ "./views/FirstView/firs1t"
+                )
+            }
+          ]
         },
+        // dashboard
+        // {
+        //   path: "/",
+        //   redirect: "/user/login"
+        // },
         {
           path: "/dashboard",
           name: "dashboard",
@@ -68,13 +86,20 @@ const router = new Router({
         {
           path: "/form",
           name: "form",
-          meta: { icon: "form", title: "表单", authority: ["admin"] },
+          meta: {
+            icon: "form",
+            title: "表单",
+            authority: ["guest", "user", "admin"]
+          },
           component: { render: h => h("router-view") },
           children: [
             {
               path: "/form/basic-form",
               name: "basicform",
-              meta: { title: "基础表单" },
+              meta: {
+                title: "基础表单",
+                authority: ["guest", "admin"]
+              },
               component: () =>
                 import(/* webpackChunkName: "from" */ "./views/Forms/BasicForm")
             },

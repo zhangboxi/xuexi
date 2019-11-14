@@ -17,5 +17,5 @@ export function isLogin() {
 }
 
 export function SetAuth() {
-  currentAuth.push("admin");
+  currentAuth.push("guest");
 }

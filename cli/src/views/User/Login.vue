@@ -13,7 +13,8 @@ export default {
       const { $router } = this;
       SetAuth();
       console.log(currentAuth);
-      $router.push("/form/step-form/info");
+      // $router.push("/form/step-form/info");
+      $router.push("/first/firstview1");
     }
   }
 };
