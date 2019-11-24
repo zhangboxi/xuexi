@@ -50,6 +50,26 @@
 					console.log(value);
 			});
 
+			function interview(count) {
+				//返回一个promise对象
+			}
+
+			//实例
+			async function test33(){
+				try{
+					//同步执行异步操作
+					await interview(1);
+					await interview(2);
+					await interview(3);
+					//同步执行异步操作
+					await Promise.all([ interview(1), interview(2)])
+					await Promise.all([ interview(3), interview(4)])
+
+				}catch(e){
+					console.log(e.count)
+				}
+			}
+
 		</script>
 	</body>
 
