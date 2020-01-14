@@ -7,7 +7,7 @@
 		<style>
 			.bg {
 				background: #FF0000;
-				
+
 			}
 		</style>
 	</head>
@@ -32,29 +32,42 @@
 						"ul", //第1个参数 - html 标签
 						{ //第2个参数 - 在一个对象里设置该标签属性
 
-							class:{
-								bg:true
+							class: {
+								bg: true
+							},
+							// DOM 属性
+							// domProps: {
+							//   innerHTML: 'baz'
+							// },
+							attrs: {
+								//正常的 HTML 特性,添加id
+								id: 'foo'
 							},
 							style: {
 								marginLight: "8px",
 								padding: "10px 20px",
 								background: '#abcdef'
 							},
-							on: {
-								click: () => {
-									console.log('click')
-								},
-								mouseover: () => {
-									console.log('mouseover');
-									this.mouseOverLog();
-								}
-							}
+							nativeOn: {
+								click: this.nativeClickHandler
+							},
+							// on: {
+							// 	click: () => {
+							// 		console.log('click')
+							// 	},
+							// 	mouseover: () => {
+							// 		console.log('mouseover');
+							// 		this.mouseOverLog();
+							// 	}
+							// }
 						},
 
-                    [
-                        createElement("li", this.message),
-                        createElement("li",'hello world 2'),
-                    ]
+						[
+							
+							'文字也可以',
+							createElement("li", this.message),
+							createElement("li", 'hello world 2'),
+						]
 					)
 				}
 
