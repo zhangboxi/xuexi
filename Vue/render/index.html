@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.bg {
+				background: #FF0000;
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div id="dome">
+			<div>{{message}}</div>
+		</div>
+		<script>
+			new Vue({
+				el: "#dome",
+				data: {
+					message: "hello world"
+				},
+				methods: {
+					mouseOverLog() {
+						console.log(this.message)
+					}
+				},
+				render(createElement) {
+					// createElement(html标签, 标签属性, 子元素)。
+					return createElement(
+						"ul", //第1个参数 - html 标签
+						{ //第2个参数 - 在一个对象里设置该标签属性
+
+							class:{
+								bg:true
+							},
+							style: {
+								marginLight: "8px",
+								padding: "10px 20px",
+								background: '#abcdef'
+							},
+							on: {
+								click: () => {
+									console.log('click')
+								},
+								mouseover: () => {
+									console.log('mouseover');
+									this.mouseOverLog();
+								}
+							}
+						},
+
+                    [
+                        createElement("li", this.message),
+                        createElement("li",'hello world 2'),
+                    ]
+					)
+				}
+
+
+			});
+		</script>
+	</body>
+</html>
