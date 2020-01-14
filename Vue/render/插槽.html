@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>演示Vue</title>
-		<style>
-
-		</style>
+		<meta charset="utf-8">
+		<title></title>
 		<script src="../js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<style>
+			.bg {
+				background: #FF0000;
+
+			}
+		</style>
 	</head>
 	<body>
 		<div id="container">
 			<tb-heading :level="2">
-				<a href="#">Hello world!</a>
+				<a slot="name1" href="#">Hello world!</a>
 			</tb-heading>
 		</div>
 	</body>
@@ -21,7 +25,7 @@
 			render: function(createElement) {
 				return createElement(
 					'h' + this.level, // tag name 标签名称
-					this.$slots.default // 子组件
+					this.$slots.name1 // 通过 $slot拿到 name1，如果没命名就是 default
 				)
 			},
 			props: {
