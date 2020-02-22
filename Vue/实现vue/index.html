@@ -4,7 +4,7 @@
   <title></title>
   <script src="Observer.js" type="text/javascript" charset="utf-8"></script>
   <script src="Watcher.js" type="text/javascript" charset="utf-8"></script>
-  <script src="Compile.js" type="text/javascript" charset="utf-8"></script>
+  <script src="Compile3.js" type="text/javascript" charset="utf-8"></script>
   <script src="SelfVue.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
@@ -12,10 +12,18 @@
   <!--1.0 这里的{{}}只是为了掩饰，暂时没什么用处
   <h1 id="name">{{name}}</h1>-->
 
-  <!--2.0版本-->
+  <!--2.0版本
   <div id="app">
     <h2>{{title}}</h2>
     <h1>{{name}}</h1>
+  </div>-->
+
+  <!--3.0版本-->
+  <div id="app">
+    <h2>{{title}}</h2>
+    <input v-model="name">
+    <h1>{{name}}</h1>
+    <button v-on:click="clickMe">click me!</button>
   </div>
 
   <script type="text/javascript">
@@ -47,7 +55,7 @@
       4Watcher:在生成的时候，把自己放入Dep中，当值改变的时候，调用自己的方法，改变页面显示的内容
       5SelfVue:自己模拟的VUE对象
     
-    */
+    
     var selfVue = new SelfVue({
       el: '#app',
       data: {
@@ -62,7 +70,26 @@
 
     window.setTimeout(function () {
       selfVue.name = 'canfoo';
-    }, 2500);
+    }, 2500);*/
+
+    /*3.0加入model，methods，mounted*/
+    new SelfVue({
+      el: '#app',
+      data: {
+        title: 'hello world',
+        name: 'canfoo'
+      },
+      methods: {
+        clickMe: function () {
+          this.title = '333';
+        }
+      },
+      mounted: function () {
+        window.setTimeout(() => {
+          this.title = '你好';
+        }, 1000);
+      }
+    });
   </script>
 </body>
 
