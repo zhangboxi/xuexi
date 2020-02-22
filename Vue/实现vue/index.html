@@ -1,0 +1,69 @@
+<html>
+
+<head>
+  <title></title>
+  <script src="Observer.js" type="text/javascript" charset="utf-8"></script>
+  <script src="Watcher.js" type="text/javascript" charset="utf-8"></script>
+  <script src="Compile.js" type="text/javascript" charset="utf-8"></script>
+  <script src="SelfVue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+  <!--1.0 这里的{{}}只是为了掩饰，暂时没什么用处
+  <h1 id="name">{{name}}</h1>-->
+
+  <!--2.0版本-->
+  <div id="app">
+    <h2>{{title}}</h2>
+    <h1>{{name}}</h1>
+  </div>
+
+  <script type="text/javascript">
+    /*
+    1.0程序原理：
+    1Observer:加入get,set,在赋值取值的时候，进行额外操作。取值时，并无多余操作。赋值时，在Dep中找到，对应的watcher调用watcher方法，修改页面值
+    2Dep中间件:将Observer与Watcher关联,当watcher生成的时候，把自己放入，Observer的Dep中，当值改变时候，去Dep中找到Watcher的方法，改变页面
+    3Watcher:在生成的时候，把自己放入Dep中，当值改变的时候，调用自己的方法，改变页面显示的内容
+    4SelfVue:自己模拟的VUE对象
+   
+
+    var ele = document.querySelector('#name');
+    var selfVue = new SelfVue({
+        name: 'hello world'
+    }, ele, 'name');
+ 
+    window.setTimeout(function () {
+        console.log('name值改变了');
+        selfVue.name = 'canfoo';
+    }, 2000);
+     */
+
+
+
+    /*2.0程序原理
+      1Observer:加入get,set,在赋值取值的时候，进行额外操作。取值时，并无多余操作。赋值时，在Dep中找到，对应的watcher调用watcher方法，修改页面值
+      2Dep中间件:将Observer与Watcher关联,当watcher生成的时候，把自己放入，Observer的Dep中，当值改变时候，去Dep中找到Watcher的方法，改变页面
+      3Compole:扫面方法，根据id，便利下的子节点，当内容为{{}}的， 生成对应的Watcher,并设置更新页面方法
+      4Watcher:在生成的时候，把自己放入Dep中，当值改变的时候，调用自己的方法，改变页面显示的内容
+      5SelfVue:自己模拟的VUE对象
+    
+    */
+    var selfVue = new SelfVue({
+      el: '#app',
+      data: {
+        title: 'hello world',
+        name: '张旭东'
+      }
+    });
+
+    window.setTimeout(function () {
+      selfVue.title = '你好';
+    }, 2000);
+
+    window.setTimeout(function () {
+      selfVue.name = 'canfoo';
+    }, 2500);
+  </script>
+</body>
+
+</html>
