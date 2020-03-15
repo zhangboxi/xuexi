@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>render</title>
+    <script src="https://cdn.bootcss.com/vue/2.3.4/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <el-input :name="name" @input="val=>name=val"></el-input>
+        <div>你的名字是{{name}}</div>
+    </div>
+    <script>
+        Vue.component('el-input', {
+            render: function(createElement) {
+                var self = this;
+                return createElement('input', {
+                    domProps: {
+                        value: self.name
+                    },
+                    on: {
+                        input: function(event) {
+                            self.$emit('input', event.target.value);
+                        }
+                    }
+                })
+            },
+            props: {
+                name: String
+            }
+        });
+        new Vue({
+            el: '#app',
+            data: {
+                name: 'hdl'
+            }
+        });
+    </script>
+</body>
+</html>

@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<div id="app">
-			<mycom :v="nnum" :ar="arr">
+			<mycom :v="nnum" :n="message" :ar="arr">
 				<div slot="slot2">hahahhah</div>
 				<div slot="slot1">ggggggggggggg</div>
 			</mycom>
@@ -34,7 +34,7 @@
 					} else {
 
 						return createElement('div',
-							[this.$slots.slot1, this.$slots.slot2])
+							[this.$slots.slot1, this.$slots.slot2,this.n])
 					}
 				},
 				props: {
@@ -43,6 +43,7 @@
 						default: 0
 					},
 					n: {
+						type: String,
 						default: 'hello'
 					},
 					ar: {
@@ -57,7 +58,8 @@
 			var app = new Vue({
 				el: '#app',
 				data: {
-					nnum: 1,
+					message:'render',
+					nnum: 2,
 					arr: [1, 2, 3, 4, 5, 6, 7, 8]
 				}
 			})

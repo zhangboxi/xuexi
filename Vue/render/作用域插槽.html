@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>render</title>
+    <script src="https://cdn.bootcss.com/vue/2.3.4/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ele>
+            <template scope="props">
+                <span>{{props.text}}</span>
+            </template>
+        </ele>
+    </div>
+    <script>
+        Vue.component('ele', {
+            render: function(createElement) {
+                // 相当于<div><slot :text="msg"></slot></div>
+                return createElement('div', [
+                    this.$scopedSlots.default({
+                        text: this.msg
+                    })
+                ]);
+            },
+            data: function() {
+                return {
+                    msg: '来自子组件'
+                }
+            }
+        });
+        new Vue({
+            el: '#app'
+        });
+    </script>
+</body>
+</html>
