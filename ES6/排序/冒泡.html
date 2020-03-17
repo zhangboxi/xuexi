@@ -1,0 +1,38 @@
+<html>
+
+<head>
+  <title></title>
+</head>
+
+<body>
+  <script>
+    function maopao(array) {
+     
+      for (let i = 0; i < array.length - 1; i++) {
+         // 提前退出冒泡循环的标志位   
+      let flag = false;
+        for (let j = 0; j < array.length - i -1; j++) {
+          if (array[j] > array[j+ 1]) {
+            let t;
+            t = array[j];
+            array[j] = array[j+ 1];
+            array[j+ 1] = t;
+
+            flag = true;
+          }
+        }
+        if(flag == false){
+          break;
+        }
+
+      }
+    }
+
+    var arr = [3, 12, 1, 5, 1, 23, 4]
+    console.log(arr);
+    maopao(arr)
+    console.log(arr);
+  </script>
+</body>
+
+</html>

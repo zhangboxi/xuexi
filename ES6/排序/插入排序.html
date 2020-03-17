@@ -1,0 +1,37 @@
+<html>
+
+<head>
+  <title></title>
+</head>
+
+<body>
+  <script>
+    function insertionSort(array) {
+      let n = array.length;
+      if (n <= 1) return;
+      for (let i = 1; i < n; ++i) {
+        let value = array[i];
+        console.log(value)
+        let j = i - 1;
+        // 查找插入的位置    
+        for (; j >= 0; --j) {
+          if (array[j] > value) {
+            array[j + 1] = array[j];
+            // 数据移动      
+          } else {
+            break;
+          }
+        }
+        array[j + 1] = value;
+        // 插入数据  
+      }
+    }
+
+    var arr = [3, 12, 1, 5, 1, 23, 4]
+    console.log(arr);
+    insertionSort(arr)
+    console.log(arr);
+  </script>
+</body>
+
+</html>
